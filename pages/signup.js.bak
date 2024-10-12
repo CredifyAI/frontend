@@ -1,0 +1,100 @@
+import React from 'react';
+import Layout from '../components/Layout';
+import { Formik, Form, Field } from 'formik';
+import {
+  TextField,
+  Button,
+  LinearProgress,
+  Typography,
+} from '@mui/material';
+import * as Yup from 'yup';
+import api from '../utils/api';
+
+const SignupSchema = Yup.object().shape({
+  email: Yup.string().email('Invalid email').required('Email is required'),
+  password: Yup.string()
+    .required('Password is required')
+    .min(8, 'Password must be at least 8 characters'),
+  confirmPassword: Yup.string()
+    .required('Confirm your password')
+    .oneOf([Yup.ref('password'), null], 'Passwords must match'),
+});
+
+const Signup = () => {
+  return (
+    <Layout>
+      <Typography variant="h5" gutterBottom>
+        Sign Up
+      </Typography>
+      <Formik
+        initialValues={{
+          email: '',
+          password: '',
+          confirmPassword: '',
+        }}
+        validationSchema={SignupSchema}
+        onSubmit={async (values, { setSubmitting }) => {
+          try {
+            const response = await api.post('/auth/signup', {
+              email: values.email,
+              password: values.password,
+            });
+          } catch (error) {
+          } finally {
+            setSubmitting(false);
+          }
+        }}
+      >
+        {({ isSubmitting, errors, touched, handleChange }) => (
+          <Form>
+            <Field
+              as={TextField}
+              name="email"
+              label="Email"
+              type="email"
+              fullWidth
+              margin="normal"
+              helperText={touched.email && errors.email}
+              error={touched.email && Boolean(errors.email)}
+              onChange={handleChange}
+            />
+            <Field
+              as={TextField}
+              name="password"
+              label="Password"
+              type="password"
+              fullWidth
+              margin="normal"
+              helperText={touched.password && errors.password}
+              error={touched.password && Boolean(errors.password)}
+              onChange={handleChange}
+            />
+            <Field
+              as={TextField}
+              name="confirmPassword"
+              label="Confirm Password"
+              type="password"
+              fullWidth
+              margin="normal"
+              helperText={touched.confirmPassword && errors.confirmPassword}
+              error={touched.confirmPassword && Boolean(errors.confirmPassword)}
+              onChange={handleChange}
+            />
+            {isSubmitting && <LinearProgress />}
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              disabled={isSubmitting}
+              style={{ marginTop: '1rem' }}
+            >
+              Sign Up
+            </Button>
+          </Form>
+        )}
+      </Formik>
+    </Layout>
+  );
+};
+
+export default Signup;

@@ -8,11 +8,10 @@ on:
 jobs:
   azure-pipeline:
     runs-on: ubuntu-latest
-
     steps:
       - name: Azure Pipeline
         uses: Azure/pipelines@v1
         with:
-          azure-devops-project-url: 'https://dev.azure.com/organization/credifyai'
+          azure-devops-project-url: 'https://dev.azure.com/credifyai/credifyai'
           azure-pipeline-name: 'credifyai' 
           azure-devops-token: '${{ secrets.AZURE_DEVOPS_PAT }}'

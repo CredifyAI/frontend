@@ -44,7 +44,7 @@ steps:
       command: 'buildAndPush'
       Dockerfile: 'Dockerfile'
       tags: |
-        $(newVersion)  # Use the new semantic version
+        $(newVersion)  
       arguments: '--platform linux/amd64,linux/arm64'
 
   - task: Bash@3

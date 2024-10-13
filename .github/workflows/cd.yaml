@@ -1,0 +1,32 @@
+name: Azure DevOps Pipeline
+
+on:
+  pull_request:
+    branches:
+      - main 
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+  trigger-azure-devops-pipeline:
+    runs-on: ubuntu-latest
+    needs: ci  
+
+    steps:
+      - name: Trigger Azure DevOps Pipeline
+        run: |
+          AZURE_DEVOPS_PAT="${{ secrets.AZURE_DEVOPS_PAT }}"
+          ORG="credifyai"
+          PROJECT="credifyai"
+          PIPELINE_ID="${{ secrets.AZURE_PIPELINE_ID }}"
+
+          curl -u ":$AZURE_DEVOPS_PAT" \
+            -X POST \
+            "https://dev.azure.com/$ORG/$PROJECT/_apis/pipelines/$PIPELINE_ID/runs?api-version=6.0" \
+            -H "Content-Type: application/json" \
+            -d '{"resources": { "repositories": { "self": { "refName": "refs/heads/main" } } }}'

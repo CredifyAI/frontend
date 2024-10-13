@@ -14,4 +14,5 @@ jobs:
         with:
           azure-devops-project-url: 'https://dev.azure.com/credifyai/credifyai'
           azure-pipeline-name: 'frontend' 
+        env:
           azure-devops-token: ${{ secrets.AZURE_DEVOPS_PAT }}

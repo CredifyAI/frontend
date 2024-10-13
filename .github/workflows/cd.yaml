@@ -6,16 +6,14 @@ on:
       - main 
 
 jobs:
-  ci:
+  azure-pipeline:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
       - name: Azure Pipeline
         uses: Azure/pipelines@v1
         with:
           azure-devops-project-url: 'https://dev.azure.com/organization/credifyai'
           azure-pipeline-name: 'credifyai' 
+        env: 
           azure-devops-token: ${{ secrets.AZURE_DEVOPS_PAT }}

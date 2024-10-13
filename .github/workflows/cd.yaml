@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Azure Pipeline
-        uses: Azure/pipelines@v1
+        uses: azure/pipelines@v1
         with:
           azure-devops-project-url: 'https://dev.azure.com/credifyai/credifyai'
           azure-pipeline-name: 'credifyai' 

@@ -30,7 +30,7 @@ steps:
 
   - task: AzureCLI@2
     inputs:
-      azureSubscription: 'frontend'
+      azureSubscription: azurerm
       scriptType: bash
       scriptLocation: inlineScript
       inlineScript: |

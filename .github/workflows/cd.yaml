@@ -18,4 +18,4 @@ jobs:
         with:
           azure-devops-project-url: 'https://dev.azure.com/organization/credifyai'
           azure-pipeline-name: 'credifyai' 
-          azure-devops-token: '${{ secrets.AZURE_DEVOPS_PAT }}'
+          azure-devops-token: ${{ secrets.AZURE_DEVOPS_PAT }}

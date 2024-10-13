@@ -1,7 +1,7 @@
 name: Azure DevOps Pipeline
 
 on:
-  merge:
+  push:
     branches:
       - main 
 

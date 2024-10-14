@@ -9,7 +9,9 @@ variables:
   imageName: 'frontend'
 
 steps:
-  - checkout: self
+  - checkout: git://credifyai/frontend
+    persistCredentials: true
+    endpoint: github
 
   - task: Bash@3
     inputs:

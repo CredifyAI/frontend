@@ -51,6 +51,7 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
+        git checkout main
         git config user.name "Azure DevOps"
         git config user.email "challagulla.l@northeastern.edu"
         git tag $newVersion

@@ -8,15 +8,25 @@ variables:
   acrName: 'credifyai'  
   imageName: 'frontend'
 
+resources:
+  repositories:
+  - repository: frontend
+    type: github
+    name: credifyai/frontend
+    endpoint: github
+
+
 steps:
   - checkout: self
     persistCredentials: true
+    fetch-depth: 0
 
   - task: Bash@3
     inputs:
       targetType: 'inline'
       script: |
         # Fetch all tags and commits
+        git checkout main
         git fetch --tags
         latest_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "v1.0.0")
         echo "Latest tag: $latest_tag"
@@ -52,6 +62,8 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
+        ls -la
+        git checkout main
         git config user.name "Azure DevOps"
         git config user.email "challagulla.l@northeastern.edu"
         git tag $newVersion

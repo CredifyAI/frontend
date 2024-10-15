@@ -8,9 +8,24 @@ variables:
   acrName: 'credifyai'  
   imageName: 'frontend'
 
+resources:
+  repositories:
+  - repository: frontend
+    type: github
+    name: credifyai/frontend
+    endpoint: github
+
+
 steps:
-  - checkout: git://credifyai/frontend
-    persistCredentials: true
+  - checkout: frontend
+    ref: main
+
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: |
+        echo "Repo check"
+        ls -la
 
   - task: Bash@3
     inputs:

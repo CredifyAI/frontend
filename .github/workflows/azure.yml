@@ -18,7 +18,6 @@ resources:
 
 steps:
   - checkout: frontend
-    ref: main
 
   - task: Bash@3
     inputs:

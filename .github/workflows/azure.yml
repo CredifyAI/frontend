@@ -64,5 +64,7 @@ steps:
         git checkout main
         git config user.name "Azure DevOps"
         git config user.email "chlokesh1306@gmail.com"
+        git tag --list
+        echo "New Version: $newVersion"
         git tag $newVersion
-        git push origin $newVersion
+        git push origin $newVersion --force

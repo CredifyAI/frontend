@@ -68,6 +68,9 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
+        echo "Checking again"
+        ls -la
+        git checkout main
         git config user.name "Azure DevOps"
         git config user.email "challagulla.l@northeastern.edu"
         git tag $newVersion

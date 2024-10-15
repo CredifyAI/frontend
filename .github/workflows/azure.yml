@@ -33,7 +33,7 @@ steps:
         IFS='.' read -r major minor patch <<< "${latest_tag#v}"
         new_patch=$((patch + 1))
         new_version="v$major.$minor.$new_patch"
-      
+
         echo "New version: $new_version"
         echo "##vso[task.setvariable variable=newVersion]$new_version"
 
@@ -64,7 +64,8 @@ steps:
         git checkout main
         git config user.name "Azure DevOps"
         git config user.email "chlokesh1306@gmail.com"
+        echo "All tags"
         git tag --list
-        echo "New Version: $new_version"
-        git tag $new_version
-        git push origin $new_version --force
+        echo "New Version: $(newVersion)"
+        git tag $(newVersion)
+        git push origin $(newVersion)

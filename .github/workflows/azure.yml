@@ -15,11 +15,9 @@ resources:
     name: credifyai/frontend
     endpoint: github
 
-
 steps:
   - checkout: self
     persistCredentials: true
-    fetch-depth: 0
 
   - task: Bash@3
     inputs:

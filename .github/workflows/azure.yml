@@ -27,14 +27,14 @@ steps:
         git checkout main
         git fetch --tags
         latest_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "v1.0.0")
-        echo "Latest tag: $latest_tag"
+        echo "Current tag: $latest_tag"
 
         # Parse the version and increment the patch version
         IFS='.' read -r major minor patch <<< "${latest_tag#v}"
         new_patch=$((patch + 1))
         new_version="v$major.$minor.$new_patch"
 
-        echo "New version: $new_version"
+        echo "New tag: $new_version"
         echo "##vso[task.setvariable variable=newVersion]$new_version"
 
   - task: AzureCLI@2
@@ -63,8 +63,6 @@ steps:
         git checkout main
         git config user.name "Azure DevOps"
         git config user.email "chlokesh1306@gmail.com"
-        echo "All tags"
-        git tag --list
-        echo "New Version: $(newVersion)"
+        echo "Tagging: $(newVersion)"
         git tag $(newVersion)
         git push origin $(newVersion)

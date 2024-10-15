@@ -9,7 +9,7 @@ variables:
   imageName: 'frontend'
 
 steps:
-  - checkout: frontend
+  - checkout: self
     persistCredentials: true
 
   - task: Bash@3

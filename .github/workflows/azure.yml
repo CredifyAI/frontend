@@ -65,6 +65,6 @@ steps:
         ls -la
         git checkout main
         git config user.name "Azure DevOps"
-        git config user.email "challagulla.l@northeastern.edu"
+        git config user.email "chlokesh1306@gmail.com"
         git tag $newVersion
         git push origin $newVersion

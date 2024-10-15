@@ -60,7 +60,6 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
-        ls -la
         git checkout main
         git config user.name "Azure DevOps"
         git config user.email "chlokesh1306@gmail.com"

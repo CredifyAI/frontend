@@ -18,6 +18,7 @@ resources:
 
 steps:
   - checkout: frontend
+    persistCredentials: true
 
   - task: Bash@3
     inputs:
@@ -31,6 +32,7 @@ steps:
       targetType: 'inline'
       script: |
         # Fetch all tags and commits
+        git checkout main
         git fetch --tags
         latest_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
         echo "Latest tag: $latest_tag"
@@ -66,8 +68,6 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
-        echo "Checking repo again"
-        ls -la
         git config user.name "Azure DevOps"
         git config user.email "challagulla.l@northeastern.edu"
         git tag $newVersion
